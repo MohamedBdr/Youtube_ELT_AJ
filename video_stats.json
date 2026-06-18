@@ -1,21 +1,56 @@
 {
-    "kind": "youtube#channelListResponse",
-    "etag": "aw8AdxfS63kvieHqLt63AnjYwVo",
-    "pageInfo": {
-        "totalResults": 1,
-        "resultsPerPage": 5
+  "kind": "youtube#playlistItemListResponse",
+  "etag": "FxuOvsktKkfmqpJTIXpEyOVnzCo",
+  "nextPageToken": "EAAaHlBUOkNBVWlFRUkzTmtaQ1F6TkZRemd5TkVKRVJERQ",
+  "items": [
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "OnGNiut4DhvW4lpDttTi6gpf7tI",
+      "id": "VVUtNEtuUE1tWnp3QXpXN1NiVkFUVVpRLnYxeU5WVTF1azhF",
+      "contentDetails": {
+        "videoId": "v1yNVU1uk8E",
+        "videoPublishedAt": "2026-06-02T18:00:39Z"
+      }
     },
-    "items": [
-        {
-            "kind": "youtube#channel",
-            "etag": "X8MpP3ilqKHg6I7iMuxpZkh6GlQ",
-            "id": "UC-4KnPMmZzwAzW7SbVATUZQ",
-            "contentDetails": {
-                "relatedPlaylists": {
-                    "likes": "",
-                    "uploads": "UU-4KnPMmZzwAzW7SbVATUZQ"
-                }
-            }
-        }
-    ]
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "jYoBxGGAZAZ07Wv5Fj--IDLrcLg",
+      "id": "VVUtNEtuUE1tWnp3QXpXN1NiVkFUVVpRLnhzX3J1eHo2T0xz",
+      "contentDetails": {
+        "videoId": "xs_ruxz6OLs",
+        "videoPublishedAt": "2026-06-02T17:00:01Z"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "2gy3hkbRPR_6XcBaKoIu1fDB7T4",
+      "id": "VVUtNEtuUE1tWnp3QXpXN1NiVkFUVVpRLjNNUWdWXzBxWVc0",
+      "contentDetails": {
+        "videoId": "3MQgV_0qYW4",
+        "videoPublishedAt": "2026-06-02T11:44:42Z"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "b27lmK9iZAgNvizw8c67Pb1lAw0",
+      "id": "VVUtNEtuUE1tWnp3QXpXN1NiVkFUVVpRLk9UUW5hczZOWnNN",
+      "contentDetails": {
+        "videoId": "OTQnas6NZsM",
+        "videoPublishedAt": "2026-06-01T19:00:01Z"
+      }
+    },
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "L6V0Lh0z77eLcvQu6K51fM2Nw8k",
+      "id": "VVUtNEtuUE1tWnp3QXpXN1NiVkFUVVpRLjJMZkpjT3Q3Wmhz",
+      "contentDetails": {
+        "videoId": "2LfJcOt7Zhs",
+        "videoPublishedAt": "2026-06-01T18:00:05Z"
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": 4334,
+    "resultsPerPage": 5
+  }
 }

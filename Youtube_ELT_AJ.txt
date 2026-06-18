@@ -1,0 +1,184 @@
+
+## Data Extraction
+-- 1. Create project folder "Youtube_ELT_AJ"
+
+-- 2. Create new repo "Youtube_ELT_AJ"
+echo "# Youtube_ELT_AJ" >> README.md
+
+git init
+git add README.md
+git commit -m "Added readme file with repo name"
+git branch -M main
+git remote add origin https://github.com/MohamedBdr/Youtube_ELT_AJ.git
+git push -u origin main
+
+-- 3. Create Virtual Environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+-- 4. Create .gitignore file ==> ignore venv from pushing to github
+git add .
+git commit -m "Added .gitignore file - ignored venv folder"
+git push -u origin main 
+
+-- 5. Install libraries you need
+pip install requests
+pip list
+
+-- 6. Channel Hnadle
+
+-- 7. .env
+git add .
+git commit -m "Added video_status.py and .env files" 
+git push -u origin main
+
+
+## Docker
+
+-- 1. Create dockerfile, requirements.txt
+
+-- 2. Create docker hub repo moh8830/ajpluskibreet_youtube_api_elt
+docker login -u moh8830
+docker build -t moh8830/ajpluskibreet_youtube_api_elt:1.0.0 .
+docker push  moh8830/ajpluskibreet_youtube_api_elt:1.0.0
+
+
+-- 3. Airflow Containers
+mkdir dags, logs, config, plugins, tests, include
+update .env file to include databases credentials
+Added docker-compose.yaml
+
+-- 4. Run docker compose file
+docker compose up -d
+docker ps
+
+docker exec -it airflow-scheduler bash
+ls
+cd ./data
+ls >> AJpluskibreet_youtube_data_2026-06-04.json
+airflow info
+airflow cheat-sheet -v
+exit
+
+docker compose -d --build  >>  if you update docker compose file
+docker volume ls
+
+docker exec -it airflow-webserver bash
+env | grep AIRFLOW_VAR
+airflow variables list
+
+
+-- 5. convert variables to airflow variables and create main.py in dag folder
+
+
+## Postgres & Data Warehouse
+-- 1. Added video_stats.py, main.py to extracted data using api and saveed it into json file
+
+-- 2. Added data_utils.py to set up connection to postgres, schemas, tables 
+
+-- 3. Added data_loading.py to read data from json files
+
+-- 4. Added data_modification.py to handle common database actions (insert, update, delete)
+
+-- 5. Added data_transformation.py to parse duration value
+
+-- 6. Added dwh.py to populate 2 schema layers (staging, core)
+
+-- 7. Updated main.py file ti include update_db dag to process JSON file and insert data into both staging and core schemas
+
+-- 8. Amendment to .env (update the docker image from 1.0.0 to 1.0.1)
+
+docker build -t moh8830/ajpluskibreet_youtube_api_elt:1.0.1 .
+docker login -u moh8830
+docker push moh8830/ajpluskibreet_youtube_api_elt:1.0.1
+docker compose pull
+docker compose up -d --force-recreate
+docker ps
+
+
+-- 9. Testing - Data Quality Checks 
+
+check if soda installed ==> go inside worker container
+docker exec -it airflow-worker bash 
+pip show soda-core-postgres
+soda --help
+
+
+create inside include/soda directory configuration.yml file to test connection to postggres database
+soda test-connection -d pg_datasource -c /opt/airflow/include/soda/configuration.yml -V
+
+create checks.yml inside include/soda directory
+tests:
+  check missing/duplicates for Video_ID for both staging and core schema
+  check likes count is greated than views count
+  check comments count is greated than views count
+
+check if tests is passed
+soda scan -d pg_datasource -c /opt/airflow/include/soda/configuration.yml -v SCHEMA=core /opt/airflow/include/soda/checks.yml
+
+integrate Data Quality test inside Airflow 
+create a dataquality directory inside dags directory and create soda.py
+
+updated main.py with data_quality dag 
+
+
+
+-- 10. Testing - Functional Checks
+
+--- 10.1 Unit tests (individual parts of code using mock credentials)
+docker exec -it airflow-worker bash
+pip show pytest  ==> check installed
+
+create unit_test.py, conftest.py under tests directory
+
+docker exec -it airflow-worker bash
+
+pytest -v tests/unit_test.py -k test_api_key
+pytest -v tests/unit_test.py -k test_channel_handle
+pytest -v tests/unit_test.py -k test_postgres_conn
+pytest -v -s tests/unit_test.py -k test_dags_integrity
+
+
+--- 10.2 Integration tests (tests how different parts of the system work together)
+
+create integration_test.py
+pytest -v tests/integration_test.py -k test_youtube_api_response
+pytest -v tests/integration_test.py -k test_real_postgres_connection
+
+
+--- 10.3 End to End tests (tests the entire ELT run by using airflow dag test command)
+docker exec -it airflow-worker bash
+
+airflow dags test --help
+airflow dags test produce_json  >>  check if the dag is running using airflow IU
+airflow dags test update_db
+airflow dags test data_quality
+
+-- 11. Restructure all dags inside one consolidated dag to apply dag dependancies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
