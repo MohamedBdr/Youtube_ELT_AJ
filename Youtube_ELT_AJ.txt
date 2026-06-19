@@ -156,8 +156,13 @@ airflow dags test data_quality
 
 -- 11. Restructure all dags inside one consolidated dag to apply dag dependancies
 
+git add .
+git commit -m "Data Quality Checks"
+git push -u origin main
 
 
+-- 12. CI/CD (Continuous Integration Continuous Development) using GitHub
+define github workflow in .github/workflows/ci_cd_yt_etl_aj.yaml
 
 
 

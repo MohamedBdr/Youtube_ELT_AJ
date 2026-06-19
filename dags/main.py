@@ -86,4 +86,4 @@ with DAG(
     soda_validate_core = yt_etl_data_quality(core_schema)
 
     # Define dependencies
-    soda_validate_staging >> soda_validate_core
+    soda_validate_staging >> soda_validate_core 
